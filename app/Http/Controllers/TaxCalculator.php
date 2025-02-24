@@ -16,4 +16,9 @@ class TaxCalculator extends Controller
         // dd($ptkpRates);
         return view("home", compact("categories", "ptkpRates"));
     }
+
+    public function calculatePPh21_ter(Request $request)
+    {
+        return response()->json([]);
+    }
 }

@@ -458,9 +458,9 @@
                 e.preventDefault();
 
                 jQuery.ajax({
-                    url: "{{ route('calc.ter21') }}",
+                    url: "{{ route('calculate.pph21.ter') }}",
                     data: jQuery('#form_pph21').serialize(),
-                    type: "post",
+                    type: "get",
 
                     success: function(result) {
                         if (result.status === 201) {
