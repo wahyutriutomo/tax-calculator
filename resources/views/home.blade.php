@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -82,360 +82,42 @@
 
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pph21" role="tabpanel"
                             aria-labelledby="pph21-tab">
-                            <form class="max-w-sm mx-auto" action="#" id="form_pph21">
-                                <label for="pph21_type"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
-                                    Pemotongan</label>
-                                <select id="pph21_type"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Pilih...</option>
-                                    @foreach ($categories[0]?->childs as $row)
-                                        <option value="{{ $row->id }}">
-                                            {{ $row->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                <label for="pph21_code"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Objek
-                                    Pajak</label>
-                                <select id="pph21_code"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Pilih...</option>
-                                    <option value="21-100-01">21-100-01 Pegawai Tetap</option>
-                                    <option value="21-100-02">21-100-02 Penerima Pensiun Berkala</option>
-                                </select>
-
-                                <label for="pph21_skema"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sekema
-                                    Perhitungan</label>
-                                <select id="pph21_skema"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected value="gross">Gross</option>
-                                    <option value="grossup">Gross Up</option>
-                                </select>
-
-                                <label for="pph21_ptkp"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PTKP</label>
-                                <select id="pph21_ptkp"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Pilih...</option>
-                                    @foreach ($ptkpRates as $key => $val)
-                                        <option value="{{ $key }}">
-                                            {{ $key . ' - ' . $val }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                <div>
-                                    <label for="pph23_ak"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasilan
-                                        yang telah dipotong PPh Pasal 21 pada masa pajak yang sama</label>
-                                    <input type="number" id="pph23_ak" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="pph23_bruto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasil
-                                        Bruto</label>
-                                    <input type="number" id="pph23_bruto" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                {{-- result --}}
-                                <div>
-                                    <label for="pph21_dpp"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DPP</label>
-                                    <input type="text" id="pph21_dpp" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="pph21_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif
-                                        (%)</label>
-                                    <input type="text" id="pph21_rate" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="pph21_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPh
-                                        21</label>
-                                    <input type="text" id="pph21_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <button type="submit"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Hitung</button>
-                                </div>
-                            </form>
+                            @include('partials/pph21')
                         </div>
 
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pph23" role="tabpanel"
                             aria-labelledby="pph23-tab">
-
-                            <form class="max-w-sm mx-auto">
-                                <label for="pph23_code"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Objek
-                                    Pajak</label>
-                                <select id="pph23_code"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected data-rate="0">Pilih...</option>
-                                    @foreach ($categories[2]?->taxObjects as $row)
-                                        <option value="{{ $row->id }}" data-rate="{{ $row->tax_rate + 0 }}">
-                                            {{ $row->code }} - {{ $row->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                <div>
-                                    <label for="pph23_bruto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasil
-                                        Bruto</label>
-                                    <input type="number" id="pph23_bruto" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="pph23_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
-                                    <input type="text" id="pph23_rate"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="pph23_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPh
-                                        23</label>
-                                    <input type="text" id="pph23_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                            </form>
-
+                            @include('partials/pph23')
                         </div>
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pph42" role="tabpanel"
                             aria-labelledby="pph42-tab">
-                            <form class="max-w-sm mx-auto">
-                                <label for="pph42_code"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Objek
-                                    Pajak</label>
-                                <select id="pph42_code"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected data-rate="0">Pilih...</option>
-                                    @foreach ($categories[4]?->taxObjects as $row)
-                                        <option value="{{ $row->id }}" data-rate="{{ $row->tax_rate + 0 }}">
-                                            {{ $row->code }} - {{ $row->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                <div>
-                                    <label for="pph42_bruto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasil
-                                        Bruto</label>
-                                    <input type="number" id="pph42_bruto" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="pph42_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
-                                    <input type="text" id="pph42_rate"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="pph42_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPh
-                                        4(2)</label>
-                                    <input type="text" id="pph42_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                            </form>
+                            @include('partials/pph4_2')
                         </div>
                         {{--  pph22 --}}
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pph22" role="tabpanel"
                             aria-labelledby="pph22-tab">
-                            <form class="max-w-sm mx-auto">
-                                <label for="pph22_code"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Objek
-                                    Pajak</label>
-                                <select id="pph22_code"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected data-rate="0">Pilih...</option>
-                                    @foreach ($categories[1]?->taxObjects as $row)
-                                        <option value="{{ $row->id }}" data-rate="{{ $row->tax_rate + 0 }}">
-                                            {{ $row->code }} - {{ $row->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                <div>
-                                    <label for="pph22_bruto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasil
-                                        Bruto</label>
-                                    <input type="number" id="pph22_bruto" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="pph22_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
-                                    <input type="text" id="pph22_rate"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="pph22_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPh
-                                        22</label>
-                                    <input type="text" id="pph22_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                            </form>
+                            @include('partials/pph22')
                         </div>
                         {{--  pph15 --}}
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pph15" role="tabpanel"
                             aria-labelledby="pph15-tab">
-                            <form class="max-w-sm mx-auto">
-                                <label for="pph15_code"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Objek
-                                    Pajak</label>
-                                <select id="pph15_code"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected data-rate="0">Pilih...</option>
-                                    @foreach ($categories[3]?->taxObjects as $row)
-                                        <option value="{{ $row->id }}" data-rate="{{ $row->tax_rate + 0 }}">
-                                            {{ $row->code }} - {{ $row->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                <div>
-                                    <label for="pph15_bruto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penghasil
-                                        Bruto</label>
-                                    <input type="number" id="pph15_bruto" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="pph15_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
-                                    <input type="text" id="pph15_rate"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="pph15_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPh
-                                        22</label>
-                                    <input type="text" id="pph15_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                            </form>
+                            @include('partials/pph15')
                         </div>
                         {{--  pphbadan --}}
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pphbadan" role="tabpanel"
                             aria-labelledby="pphbadan-tab">
-                            <form class="max-w-sm mx-auto">
-                                Belum diimplement
-                            </form>
+                            @include('partials/pph-badan')
                         </div>
                         {{--  ppn --}}
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="ppn" role="tabpanel"
                             aria-labelledby="ppn-tab">
-                            <form class="max-w-sm mx-auto">
-                                <div>
-                                    <label for="ppn_dpp"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DPP</label>
-                                    <input type="number" id="ppn_dpp" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="ppn_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
-                                    <input type="text" id="ppn_rate" value="11 %" data-rate="11"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="ppn_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPN</label>
-                                    <input type="text" id="ppn_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div>
-                                    <label for="price_after_ppn"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga
-                                        Setalah PPN</label>
-                                    <input type="text" id="price_after_ppn" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                            </form>
+                            @include('partials/ppn')
                         </div>
 
                         {{--  ppnbm --}}
                         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="ppnbm" role="tabpanel"
                             aria-labelledby="ppnbm-tab">
-                            <form class="max-w-sm mx-auto">
-                                <div>
-                                    <label for="ppnbm_dpp"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DPP</label>
-                                    <input type="number" id="ppnbm_dpp" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="ppnbm_rate"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif
-                                        (%)</label>
-                                    <input type="number" id="ppnbm_rate" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
-
-                                <div>
-                                    <label for="ppnbm_result"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PPnBM</label>
-                                    <input type="text" id="ppnbm_result" value="0"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" readonly />
-                                </div>
-
-                            </form>
+                            @include('partials/ppnbm')
                         </div>
                         {{-- end --}}
 
@@ -457,17 +139,33 @@
             $("#form_pph21").on("submit", function(e) {
                 e.preventDefault();
 
+                var type = $('#pph21_type').val();
+                var objectCode = $('#pph21_code').val();
+                var schema = $('#pph21_skema').val();
+                var ptkp = $('#pph21_ptkp').val();
+                var pph21_ak = $('#pph21_ak').val();
+                var pph21_bruto = $('#pph21_bruto').val();
+
                 jQuery.ajax({
                     url: "{{ route('calculate.pph21.ter') }}",
-                    data: jQuery('#form_pph21').serialize(),
-                    type: "get",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "code": objectCode,
+                        "schema": schema,
+                        "ptkp": ptkp,
+                        "ak_bruto": pph21_ak || 0,
+                        "ph_bruto": pph21_bruto || 0
+                    },
+                    type: "post",
 
                     success: function(result) {
-                        if (result.status === 201) {
-                            // 
-                        } else {
-                            // 
-                        }
+                        // console.log(result);
+                        $('#pph21_dpp').val(result.dpp);
+                        $('#pph21_rate').val(result.rate);
+                        $('#pph21_result').val(result.pph);
                     },
                 });
 
