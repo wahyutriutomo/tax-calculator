@@ -86,3 +86,37 @@
         </div>
     </form>
 </div>
+
+<script>
+    // {{-- pph21 --}}
+    $(document).ready(function() {
+        $("#form_pph21").on("submit", function(e) {
+            e.preventDefault();
+
+            var type = $("#pph21_type").val();
+            var objectCode = $("#pph21_code").val();
+            var schema = $("#pph21_skema").val();
+            var ptkp = $("#pph21_ptkp").val();
+            var pph21_ak = $("#pph21_ak").val();
+            var pph21_bruto = $("#pph21_bruto").val();
+
+            jQuery.ajax({
+                url: "{{ route('calculate.pph21.ter') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    code: objectCode,
+                    schema: schema,
+                    ptkp: ptkp,
+                    ak_bruto: pph21_ak || 0,
+                    ph_bruto: pph21_bruto || 0,
+                },
+                type: "post",
+                success: function(result) {
+                    $("#pph21_dpp").val(result.dpp);
+                    $("#pph21_rate").val(result.rate);
+                    $("#pph21_result").val(result.pph);
+                },
+            });
+        });
+    });
+</script>

@@ -29,7 +29,6 @@ class TaxObjectCodeSeeder extends Seeder
                 'tax_rate' => 2,
             ]
         ];
-
         TaxObjectCode::insert($data);
 
         // pph 4(2)
@@ -107,5 +106,31 @@ class TaxObjectCodeSeeder extends Seeder
             ]
         ];
         TaxObjectCode::insert($pph21Data);
+
+        // pph badan
+        $pphBadamData = [
+            [
+                'tax_category_id' => 6,
+                'code' => '31E-1',
+                'name' => 'Pasal 31E ayat (1)',
+                'description' => 'Wajib Pajak Badan dalam negeri dengan peredaran bruto sampai dengan Rp. 50 Milyar mendapat fasilitas berupa pengurangan tarif sebesar 50%.',
+                'tax_rate' => 0,
+            ],
+            [
+                'tax_category_id' => 6,
+                'code' => '17-1-B',
+                'name' => 'Pasal 17 ayat (1) huruf b',
+                'description' => 'Tarif pajak yang diterapkan atas Penghasilan Kena Pajak bagi Wajib Pajak Badan dalam negeri dan Bentuk Usaha Tetap.',
+                'tax_rate' => 22,
+            ],
+            [
+                'tax_category_id' => 6,
+                'code' => '17-2-B',
+                'name' => 'Pasal 17 ayat (2) huruf b',
+                'description' => 'Wajib Pajak Badan dalam negeri berbentuk PT dapat memperoleh tarif 3% lebih rendah. Syaratnya paling sedikit 40% dari jumlah keseluruhan saham yang disetor diperdagangkan di BEI.',
+                'tax_rate' => 19,
+            ]
+        ];
+        TaxObjectCode::insert($pphBadamData);
     }
 }
